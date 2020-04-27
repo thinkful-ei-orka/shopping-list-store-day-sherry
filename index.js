@@ -79,10 +79,23 @@ const handleNewItemSubmit = function () {
     render();
   });
 };
+
+//changes currentName to newName
+//const changeItemName() {
+//    const changedName = $('.js-change-item-name').val();
+//    store.items[currentName] = store.items[changedName];
+//}
+
+//finds currentName for changing name
 const findCurrentName = function(id) {
   const currentArr = store.items.find(item => item.id === id);
   console.log(currentArr);
-  const currentName = store.items.name[currentArr.name];
+  const currentName = $(item).currentArr.name;
+  //const currentName = store.items[currentArr.name];
+  //const currentName = store.items.find(nameInArr => currentArr.name)
+  // const currentName = store.items.find(function() {
+  //   return currentArr[name];
+  // });
   console.log(currentName);
 }
 
@@ -96,9 +109,8 @@ const handleChangeItemNameSubmit = function () {
 //    console.log(store.items[name[id]]);
 //    const currentName = store.items[name[id]];
     findCurrentName(id);
-    
-//    const changedName = $('.js-change-item-name').val();
-//    store.items[currentName] = store.items[changedName];
+//  changeItemName();    
+
 //    render();
   })
 }

@@ -16,6 +16,7 @@ const generateItemElement = function (item) {
     `;
   }
 
+  //addded input for name change, 2 lines from the bottom
   return `
     <li class='js-item-element' data-item-id='${item.id}'>
       ${itemTitle}
@@ -26,6 +27,8 @@ const generateItemElement = function (item) {
         <button class='shopping-item-delete js-item-delete'>
           <span class='button-label'>delete</span>
         </button>
+        <input type="text" name="change-item-name" class="js-change-item-name" placeholder="change item name">
+        <button type="button" class="js-change-item-name-button">Change Name</button>
       </div>
     </li>`;
 };
@@ -34,6 +37,7 @@ const generateShoppingItemsString = function (shoppingList) {
   const items = shoppingList.map((item) => generateItemElement(item));
   return items.join('');
 };
+
 
 /**
  * Render the shopping list in the DOM
@@ -75,6 +79,29 @@ const handleNewItemSubmit = function () {
     render();
   });
 };
+const findCurrentName = function(id) {
+  const currentArr = store.items.find(item => item.id === id);
+  console.log(currentArr);
+  const currentName = store.items.name[currentArr.name];
+  console.log(currentName);
+}
+
+//handles click event on change item name
+const handleChangeItemNameSubmit = function () {
+  $('.js-shopping-list').on('click', '.js-change-item-name-button', event => {
+    event.preventDefault();
+    console.log('handleChangeItemNameSubmit ran')
+    const id = getItemIdFromElement(event.currentTarget);
+    console.log(id);
+//    console.log(store.items[name[id]]);
+//    const currentName = store.items[name[id]];
+    findCurrentName(id);
+    
+//    const changedName = $('.js-change-item-name').val();
+//    store.items[currentName] = store.items[changedName];
+//    render();
+  })
+}
 
 const toggleCheckedForListItem = function (id) {
   const foundItem = store.items.find(item => item.id === id);
@@ -160,6 +187,7 @@ const handleShoppingList = function () {
   handleItemCheckClicked();
   handleDeleteItemClicked();
   handleToggleFilterClick();
+  handleChangeItemNameSubmit();
 };
 
 // when the page loads, call `handleShoppingList`
